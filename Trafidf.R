@@ -49,6 +49,13 @@ merkitkk2 <- tm_map(merkitkk2, removePunctuation)
 merkitkk2 <- tm_map(merkitkk2, stemDocument)
 wordcloud(merkitkk2, max.words = 60, random.order = FALSE, colors= brewer.pal(6, "Dark2"))
 
+# tutkitaan koko data, vaatii laskentatehoa
+merkitkk3 <- Corpus(VectorSource(merkkiselvak))
+merkitkk3 <- tm_map(merkitkk3, PlainTextDocument)
+merkitkk3 <- tm_map(merkitkk3, removePunctuation)
+merkitkk3 <- tm_map(merkitkk3, stemDocument)
+wordcloud(merkitkk3, max.words = 60, random.order = FALSE, colors= brewer.pal(6, "Dark2"))
+
 # Tutkitaan määriä, miten tilastossa esiintyy eri automerkkejä
 library(plyr)
 library(ggplot2)
@@ -85,7 +92,7 @@ xc <- as.matrix(co2matalam) #asettaa datan matrix:iin
 counts <- table(xc) #establish frequencies
 par(ps = 8, cex = 1, cex.main = 2) #text size
 luokittelu <- counts[which(counts>2000)] 
-bp <- barplot(luokittelu, las = 2, main = "Suomessa co2 (0-100) rekisteröinnit", xlab = "Merkit") #piirtää plotin, joissa kulkuneuvojen määrä yli 2000
+bp <- barplot(luokittelu, las = 2, main = "Suomessa rekisteröidyt, co2 päästö 0-100", xlab = "Merkit") #piirtää plotin, joissa kulkuneuvojen määrä yli 2000
 text(bp, 0, luokittelu, cex=0, pos=3)
 
 # Analyysi: Eri otantojen perusteella yleisia kulkuneuvojen merkkeja ovat esimerkiksi: toyota, volkswagen, ford, volvo, mercedesbenz. 
